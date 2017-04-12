@@ -1,51 +1,35 @@
-delimiter]]
+create database if not exists talessya;
+use talessya;
 
-drop procedure if exists seleccionarReinos]]
+drop table if exists reino;
+drop table if exists ciudad;
+drop table if exists gobernante;
 
-create procedure seleccionarReinos(cod int,
-									nombreReino varchar(50),
-									ciudadCapital varchar(50),
-									gob varchar int)
-comment ''
+create table gobernante
+(
+	id int,
+	nombre varchar(70),
+		primary key (id)
+);
 
-	declare condBusqueda varchar(255) default '';
-	set @busqueda = 'select id, nombre, capital, gobernante from reino';
+create table ciudad
+(
+	id int,
+	nombre varchar(70),
+		primary key (id)
+);
 
-	-- Para búsqueda de identificador:
-	if cod is not null then
-		set condBusqueda = concat(' where id = ', cod);
-	end if;
-	-- Para búsqueda de nombre:
-	if nombreReino is not null
-		if condBusqueda = ''
-			set condBusqueda = concat(' where nombre rlike "', nombreReino, '"');
-		else
-			set condBusqueda = concat(condBusqueda, ' and nombre rlike "', nombreReino, '"');
-		end if;
-	end if;
-	-- Para búsqueda por capital:
-	if ciudadCapital is not null
-		if condBusqueda = ''
-			set condBusqueda = concat(' where capital rlike "', ciudadCapital, '"');
-		else
-			set condBusqueda = concat(condBusqueda, ' and capital rlike "', ciudadCapital, '"');
-		end if;
-	end if;
-	-- Para búsqueda por gobernante
-	if gob is not null
-		if condBusqueda = ''
-			set condBusqueda = concat(' where gobernante = ', nombreReino);
-		else
-			set condBusqueda = concat(condBusqueda, ' and nombre gobernante = ', nombreReino);
-		end if;
-	end if;
-
-	set @busqueda = concat(@busqueda, condBusqueda);
-
-	prepare busquedaReino from @busqueda;
-	execute busquedaReino;
-	deallocate prepare busquedaReino;
-
-end]]
-
-delimiter;
+create table reino
+(
+	id int,
+	nombre varchar(70),
+	capital int,
+	gobernante int,
+		primary key (id),
+		foreign key (capital) references ciudad (id)
+			on update cascade
+			on delete restrict,
+		foreing key (gobernante) references gobernante (id)
+			on update cascade
+			on delete restrict
+);
