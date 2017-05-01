@@ -1,5 +1,8 @@
 delimiter ]]
 
+-- PROCEDIMIENTO INSERCION
+
+-- PROCEDIMIENTO SELECCION
 drop procedure if exists seleccionarReinos]]
 
 create procedure seleccionarReinos(cod int,
@@ -47,5 +50,13 @@ comment ''
 	deallocate prepare busquedaReino;
 
 end]]
+
+-- PROCEDIMIENTO ELIMINACION
+
+-- PROCEDIMIENTO ACTUALIZACION
+
+-- TRIGGERS
+
+-- EVENTOS
 
 delimiter ;
