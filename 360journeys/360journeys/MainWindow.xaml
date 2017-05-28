@@ -1,8 +1,27 @@
-﻿<Window x:Class="_360journeys.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="360 journeys - Talessya" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        xmlns:local="clr-namespace:_360journeys" x:Class="_360journeys.MainWindow"
+        Title="360 journeys - Talessya" Height="350" Width="525" ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:ReinosVM/>
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Lista de reinos" Width="181">
+                <ListBox Height="250"/>
+            </GroupBox>
+            <GroupBox Header="Lista de ciudades" Width="176">
+                <ListBox Height="250"/>
+            </GroupBox>
+            <GroupBox Header="???" Width="150">
+                <ListBox Height="250"/>
+            </GroupBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Conectar a BD" Margin="5, 0" Command="{Binding ConectarBD_Click, Mode=OneWay}"/>
+            <Button Content="Desconectar de BD" Margin="5, 0" Command="{Binding DesconectarBD_Click, Mode=OneWay}"/>
+            <Label Content="{Binding Mensaje}" Background="{Binding ColorConexion}" Width="207"/>
+        </StackPanel>
+    </StackPanel>
 </Window>
