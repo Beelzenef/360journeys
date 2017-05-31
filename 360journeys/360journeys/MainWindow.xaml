@@ -9,7 +9,7 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal">
             <GroupBox Header="Lista de reinos" Width="181">
-                <ListBox Height="250"/>
+                <ListBox Height="250" ItemsSource="{Binding ListaReinos}"/>
             </GroupBox>
             <GroupBox Header="Lista de ciudades" Width="176">
                 <ListBox Height="250"/>
@@ -20,7 +20,8 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Content="Conectar a BD" Margin="5, 0" Command="{Binding ConectarBD_Click, Mode=OneWay}"/>
-            <Button Content="Desconectar de BD" Margin="5, 0" Command="{Binding DesconectarBD_Click, Mode=OneWay}"/>
+            <Button Content="Desconectar de BD" Margin="5, 0" Command="{Binding DesconectarBD_Click, Mode=OneWay}" IsEnabled="{Binding Conectado}"/>
+            <Button Content="Reinos" Margin="5, 0" Command="{Binding ListarReinos_Click, Mode=OneWay}" IsEnabled="{Binding Conectado}"/>
             <Label Content="{Binding Mensaje}" Background="{Binding ColorConexion}" Width="207"/>
         </StackPanel>
     </StackPanel>

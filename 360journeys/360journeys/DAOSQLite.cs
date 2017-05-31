@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SQLite;
 
 namespace _360journeys
@@ -42,5 +44,36 @@ namespace _360journeys
                 throw;
             }
         }
+
+        public List<string> SeleccionarReinos()
+        {
+            List<string> listaReinos = new List<string>();
+
+            string orden;
+
+            orden = "select nombre from reino";
+
+            SQLiteCommand comandoAEjecutar = new SQLiteCommand(orden, connSQLite);
+
+            try
+            {
+                SQLiteDataReader lectorDatos = comandoAEjecutar.ExecuteReader();
+
+                while (lectorDatos.Read())
+                {
+                    string reinoTMP = lectorDatos["nombre"].ToString();
+
+                    listaReinos.Add(reinoTMP);
+                }
+
+                lectorDatos.Close();
+                return listaReinos;
+            }
+            catch (SQLiteException)
+            {
+                throw new Exception("No tiene permisos para ejecutar esta orden");
+            }
+        }
+
     }
 }

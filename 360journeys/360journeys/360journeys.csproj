@@ -82,6 +82,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAOSQLite.cs" />
+    <Compile Include="ModelosTalessya.cs" />
     <Compile Include="ReinosVM.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">

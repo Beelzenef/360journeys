@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -8,6 +9,8 @@ namespace _360journeys
     {
         DAOSQLite _dao;
         string _mensaje = "Sin informacion";
+
+        List<string> listaReinos;
 
         #region
 
@@ -54,6 +57,16 @@ namespace _360journeys
             }
         }
 
+        public List<string> ListaReinos
+        {
+            get { return listaReinos; }
+            set
+            {
+                listaReinos = value;
+                NotificarCambioDePropiedad("ListaReinos");
+            }
+        }
+
         #endregion
 
         private void Conectar()
@@ -61,16 +74,14 @@ namespace _360journeys
             try
             {
                 _dao = null;
-                    _dao = new DAOSQLite();
-                    _dao.Conectar("talessya.db");
-                    Mensaje = "Conectado a BD";
+                _dao = new DAOSQLite();
+                _dao.Conectar("talessya.db");
+                Mensaje = "Conectado a BD";
             }
             catch (Exception e)
             {
-                //Si ha habido algun error, ponlo en el mensaje y se notificara al label para que lo ponga.
                 Mensaje = e.Message;
             }
-            //Se pueden notificar los cambios tanto por los set, como en cualquier momento en el que nosotros queramos:
             NotificarCambioDePropiedad("ColorConexion");
             NotificarCambioDePropiedad("Conectado");
         }
@@ -79,11 +90,19 @@ namespace _360journeys
         {
 
             _dao.Desconectar();
+            ListaReinos = null;
+
             Mensaje = "Desconectado de BD";
 
             NotificarCambioDePropiedad("ColorConexion");
             NotificarCambioDePropiedad("Conectado");
+            NotificarCambioDePropiedad("ListaReinos");
+        }
 
+        public void SelectReinos()
+        {
+            ListaReinos = _dao.SeleccionarReinos();
+            Mensaje = "Datos cargados";
         }
 
         #region Comandos
@@ -103,6 +122,14 @@ namespace _360journeys
             get
             {
                 return new RelayCommand(o => Desconectar(), o => true);
+            }
+        }
+
+        public ICommand ListarReinos_Click
+        {
+            get
+            {
+                return new RelayCommand(o => SelectReinos(), o => true);
             }
         }
 
