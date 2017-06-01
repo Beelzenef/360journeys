@@ -106,7 +106,32 @@ namespace _360journeys
             {
                 throw new Exception("No tiene permisos para ejecutar esta orden");
             }
+        }
 
+        public Gobernante SeleccionarGobernante(int codigoReino)
+        {
+            Gobernante gob = new Gobernante();
+
+            string orden;
+            orden = "select nombre from gobernante where id = '" + codigoReino + "'";
+
+            SQLiteCommand comandoAEjecutar = new SQLiteCommand(orden, connSQLite);
+
+            try
+            {
+                SQLiteDataReader lectorDatos = comandoAEjecutar.ExecuteReader();
+
+                while (lectorDatos.Read())
+                {             
+                    gob.Nombre = lectorDatos["nombre"].ToString();
+                }
+            }
+            catch (SQLiteException)
+            {
+                throw new Exception("No tiene permisos para ejecutar esta orden");
+            }
+
+            return gob;
         }
 
     }

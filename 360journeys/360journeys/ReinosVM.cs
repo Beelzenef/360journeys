@@ -9,9 +9,12 @@ namespace _360journeys
     class ReinosVM : INotifyPropertyChanged
     {
         DAOSQLite _dao;
+        Reino _reino;
+        Gobernante _gob;
         string _mensaje = "Sin informacion";
 
         ObservableCollection<Reino> listaReinos;
+        List<string> listaCiudades;
 
         #region
 
@@ -68,6 +71,43 @@ namespace _360journeys
             }
         }
 
+        public List<string> ListaCiudades
+        {
+            get { return listaCiudades; }
+            set
+            {
+                listaCiudades = value;
+                NotificarCambioDePropiedad("ListaCiudades");
+            }
+        }
+
+        public Reino ReinoSeleccionado
+        {
+            get { return _reino; }
+            set
+            {
+                if (_reino != value)
+                {
+                    _reino = value;
+                    if (_dao.Conectado() && _reino != null)
+                    {
+                        ListaCiudades = _dao.SeleccionarCiudades(_reino.ID);
+                        GobernanteSeleccionado = _dao.SeleccionarGobernante(_reino.Gobernante);
+                    }
+                }
+            }
+        }
+
+        public Gobernante GobernanteSeleccionado
+        {
+            get { return _gob; }
+            set
+            {
+                _gob = value;
+                NotificarCambioDePropiedad("GobernanteSeleccionado");
+            }
+        }
+
         #endregion
 
         private void Conectar()
@@ -92,12 +132,12 @@ namespace _360journeys
 
             _dao.Desconectar();
             ListaReinos = null;
+            ListaCiudades = null;
 
             Mensaje = "Desconectado de BD";
 
             NotificarCambioDePropiedad("ColorConexion");
             NotificarCambioDePropiedad("Conectado");
-            NotificarCambioDePropiedad("ListaReinos");
         }
 
         public void SelectReinos()
@@ -111,9 +151,7 @@ namespace _360journeys
         public ICommand ConectarBD_Click
         {
             get
-            {
-                //"o" es el objeto cualquiera. Se tratan de expresiones lambda. Estamos diciendo que el objeto que use este comando llamará a ConectarBD, y el true
-                //es que el CanExecute es true, por lo que puede ejecutarlo.
+            {               
                 return new RelayCommand(o => Conectar(), o => true);
             }
         }

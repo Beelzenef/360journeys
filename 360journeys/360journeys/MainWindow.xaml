@@ -2,27 +2,27 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:_360journeys" x:Class="_360journeys.MainWindow"
-        Title="360 journeys - Talessya" Height="350" Width="525" ResizeMode="NoResize">
+        Title="360 journeys - Talessya" Height="195.518" Width="463.448" ResizeMode="NoResize">
     <Window.DataContext>
         <local:ReinosVM/>
     </Window.DataContext>
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <GroupBox Header="Lista de reinos" Width="181">
-                <ListBox Height="250" ItemsSource="{Binding ListaReinos}"/>
+            <GroupBox Header="Lista de reinos" Width="150">
+                <ListBox Height="100" ItemsSource="{Binding ListaReinos}" SelectedItem="{Binding ReinoSeleccionado}"/>
             </GroupBox>
-            <GroupBox Header="Lista de ciudades" Width="176">
-                <ListBox Height="250"/>
+            <GroupBox Header="Lista de ciudades" Width="150">
+                <ListBox Height="100" ItemsSource="{Binding ListaCiudades}"/>
             </GroupBox>
-            <GroupBox Header="???" Width="150">
-                <ListBox Height="250"/>
+            <GroupBox Header="Gobernante" Width="150">
+                <Label Content="{Binding GobernanteSeleccionado}" />
             </GroupBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Content="Conectar a BD" Margin="5, 0" Command="{Binding ConectarBD_Click, Mode=OneWay}"/>
             <Button Content="Desconectar de BD" Margin="5, 0" Command="{Binding DesconectarBD_Click, Mode=OneWay}" IsEnabled="{Binding Conectado}"/>
             <Button Content="Reinos" Margin="5, 0" Command="{Binding ListarReinos_Click, Mode=OneWay}" IsEnabled="{Binding Conectado}"/>
-            <Label Content="{Binding Mensaje}" Background="{Binding ColorConexion}" Width="207"/>
+            <Label Content="{Binding Mensaje}" Background="{Binding ColorConexion}" Width="177"/>
         </StackPanel>
     </StackPanel>
 </Window>

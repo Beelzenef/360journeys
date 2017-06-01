@@ -71,6 +71,24 @@ namespace _360journeys
 
     class Gobernante
     {
+        int id;
+        string nombre;
 
+        public int ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.Nombre;
+        }
     }
 }
