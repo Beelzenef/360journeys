@@ -14,9 +14,14 @@
             <GroupBox Header="Lista de ciudades" Width="150">
                 <ListBox Height="100" ItemsSource="{Binding ListaCiudades}"/>
             </GroupBox>
-            <GroupBox Header="Gobernante" Width="150">
-                <Label Content="{Binding GobernanteSeleccionado}" />
-            </GroupBox>
+            <StackPanel>
+                <GroupBox Header="Gobernante" Width="150">
+                    <Label Content="{Binding GobernanteSeleccionado}" Height="30"/>
+                </GroupBox>
+                <GroupBox Header="Capital" Width="150">
+                    <Label Content="{Binding CapitalSeleccionada}" Height="30"/>
+                </GroupBox>
+            </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Content="Conectar a BD" Margin="5, 0" Command="{Binding ConectarBD_Click, Mode=OneWay}"/>

@@ -10,7 +10,8 @@ namespace _360journeys
     {
         DAOSQLite _dao;
         Reino _reino;
-        Gobernante _gob;
+        Gobernante _gobDeUnReino;
+        Ciudad _capitalDeUnReino;
         string _mensaje = "Sin informacion";
 
         ObservableCollection<Reino> listaReinos;
@@ -93,6 +94,7 @@ namespace _360journeys
                     {
                         ListaCiudades = _dao.SeleccionarCiudades(_reino.ID);
                         GobernanteSeleccionado = _dao.SeleccionarGobernante(_reino.Gobernante);
+                        CapitalSeleccionada = _dao.SeleccionarCapital(_reino.Capital);
                     }
                 }
             }
@@ -100,11 +102,21 @@ namespace _360journeys
 
         public Gobernante GobernanteSeleccionado
         {
-            get { return _gob; }
+            get { return _gobDeUnReino; }
             set
             {
-                _gob = value;
+                _gobDeUnReino = value;
                 NotificarCambioDePropiedad("GobernanteSeleccionado");
+            }
+        }
+
+        public Ciudad CapitalSeleccionada
+        {
+            get { return _capitalDeUnReino; }
+            set
+            {
+                _capitalDeUnReino = value;
+                NotificarCambioDePropiedad("CapitalSeleccionada");
             }
         }
 
@@ -134,6 +146,7 @@ namespace _360journeys
             ListaReinos = null;
             ListaCiudades = null;
             GobernanteSeleccionado = null;
+            CapitalSeleccionada = null;
 
             Mensaje = "Desconectado de BD";
 

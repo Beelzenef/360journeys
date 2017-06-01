@@ -108,6 +108,34 @@ namespace _360journeys
             }
         }
 
+        public Ciudad SeleccionarCapital(int capital)
+        {
+            Ciudad capitalDeReino = new Ciudad();
+
+            string orden;
+            orden = "select nombre from ciudad where id = '" + capital + "'";
+
+            SQLiteCommand comandoAEjecutar = new SQLiteCommand(orden, connSQLite);
+
+            try
+            {
+                SQLiteDataReader lectorDatos = comandoAEjecutar.ExecuteReader();
+
+                while (lectorDatos.Read())
+                {
+                    capitalDeReino.Nombre = lectorDatos["nombre"].ToString();
+
+                }
+
+                lectorDatos.Close();
+                return capitalDeReino;
+            }
+            catch (SQLiteException)
+            {
+                throw new Exception("No tiene permisos para ejecutar esta orden");
+            }
+        }
+
         public Gobernante SeleccionarGobernante(int codigoReino)
         {
             Gobernante gob = new Gobernante();
