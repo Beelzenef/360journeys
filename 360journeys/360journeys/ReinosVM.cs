@@ -133,6 +133,7 @@ namespace _360journeys
             _dao.Desconectar();
             ListaReinos = null;
             ListaCiudades = null;
+            GobernanteSeleccionado = null;
 
             Mensaje = "Desconectado de BD";
 
