@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -10,7 +11,7 @@ namespace _360journeys
         DAOSQLite _dao;
         string _mensaje = "Sin informacion";
 
-        List<string> listaReinos;
+        ObservableCollection<Reino> listaReinos;
 
         #region
 
@@ -57,7 +58,7 @@ namespace _360journeys
             }
         }
 
-        public List<string> ListaReinos
+        public ObservableCollection<Reino> ListaReinos
         {
             get { return listaReinos; }
             set

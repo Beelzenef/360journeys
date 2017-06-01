@@ -32,11 +32,41 @@ namespace _360journeys
             get { return gobernante; }
             set { gobernante = value; }
         }
+
+        public override string ToString()
+        {
+            return this.Nombre;
+        }
     }
 
     class Ciudad
     {
+        int id;
+        string nombre;
+        int enReino;
 
+        public int ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+        public int EnReino
+        {
+            get { return enReino; }
+            set { enReino = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.Nombre;
+        }
     }
 
     class Gobernante

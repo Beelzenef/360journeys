@@ -45,13 +45,12 @@ namespace _360journeys
             }
         }
 
-        public List<string> SeleccionarReinos()
+        public ObservableCollection<Reino> SeleccionarReinos()
         {
-            List<string> listaReinos = new List<string>();
+            ObservableCollection<Reino> listaReinos = new ObservableCollection<Reino>();
 
             string orden;
-
-            orden = "select nombre from reino";
+            orden = "select id, nombre, capital, gobernante from reino";
 
             SQLiteCommand comandoAEjecutar = new SQLiteCommand(orden, connSQLite);
 
@@ -61,7 +60,12 @@ namespace _360journeys
 
                 while (lectorDatos.Read())
                 {
-                    string reinoTMP = lectorDatos["nombre"].ToString();
+                    Reino reinoTMP = new Reino();
+                    
+                    reinoTMP.ID = ushort.Parse(lectorDatos["id"].ToString());
+                    reinoTMP.Nombre = lectorDatos["nombre"].ToString();
+                    reinoTMP.Capital = ushort.Parse(lectorDatos["capital"].ToString());
+                    reinoTMP.Gobernante = ushort.Parse(lectorDatos["gobernante"].ToString());
 
                     listaReinos.Add(reinoTMP);
                 }
@@ -73,6 +77,36 @@ namespace _360journeys
             {
                 throw new Exception("No tiene permisos para ejecutar esta orden");
             }
+        }
+
+        public List<string> SeleccionarCiudades(int codigoReino)
+        {
+            List<string> listaCiudades = new List<string>();
+
+            string orden;
+            orden = "select nombre from ciudad where enReino = '" + codigoReino + "'";
+
+            SQLiteCommand comandoAEjecutar = new SQLiteCommand(orden, connSQLite);
+
+            try
+            {
+                SQLiteDataReader lectorDatos = comandoAEjecutar.ExecuteReader();
+
+                while (lectorDatos.Read())
+                {
+                    string ciudadTMP = lectorDatos["nombre"].ToString();
+
+                    listaCiudades.Add(ciudadTMP);
+                }
+
+                lectorDatos.Close();
+                return listaCiudades;
+            }
+            catch (SQLiteException)
+            {
+                throw new Exception("No tiene permisos para ejecutar esta orden");
+            }
+
         }
 
     }
