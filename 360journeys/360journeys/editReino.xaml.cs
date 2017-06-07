@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace _360journeys
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for editReino.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class editReino : Window
     {
-        public MainWindow()
+        public editReino()
         {
             InitializeComponent();
         }
 
-        private void click_AbrirEditReino(object sender, RoutedEventArgs e)
+        private void click_CerrarWin(object sender, RoutedEventArgs e)
         {
-            new editReino().Show();
+            this.Close();
         }
     }
 }

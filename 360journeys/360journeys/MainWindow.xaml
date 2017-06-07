@@ -14,9 +14,10 @@
             </MenuItem>
             <MenuItem Header="Sobre reinos" IsEnabled="{Binding Conectado}">
                 <MenuItem Header="Listar reinos" Command="{Binding ListarReinos_Click, Mode=OneWay}"/>
-                <MenuItem Header="Editar reinos"/>
-                <MenuItem Header="Asignar nuevo gobernante"/>
-                <MenuItem Header="Asignar nueva capital"/>
+                <MenuItem Header="Añadir reinos"/>
+                <MenuItem Header="Editar reinos" Click="click_AbrirEditReino"/>
+                <MenuItem Header="Asignar nuevo gobernante" IsEnabled="{Binding HayReinoElegido}"/>
+                <MenuItem Header="Asignar nueva capital" IsEnabled="{Binding HayReinoElegido}"/>
             </MenuItem>
             <MenuItem Header="Sobre ciudades" IsEnabled="{Binding Conectado}">
                 <MenuItem Header="Editar ciudades"/>

@@ -120,6 +120,25 @@ namespace _360journeys
             }
         }
 
+        #region Para (dis)able opciones, hay elementos seleccionados
+
+        public bool HayReinoElegido
+        {
+            get { return ReinoSeleccionado != null; }
+        }
+
+        public bool HayCapitalElegida
+        {
+            get { return CapitalSeleccionada != null; }
+        }
+
+        public bool HayGobernanteElegido
+        {
+            get { return GobernanteSeleccionado != null; }
+        }
+
+        #endregion
+
         #endregion
 
         private void Conectar()

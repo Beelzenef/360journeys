@@ -1,0 +1,25 @@
+﻿<Window x:Class="_360journeys.editReino"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_360journeys"
+        mc:Ignorable="d"
+        Title="editReino" Height="300" Width="300">
+    <Window.DataContext>
+        <local:ReinosVM/>
+    </Window.DataContext>
+    <StackPanel>
+        <GroupBox Header="Nombre" Margin="5">
+            <TextBox Text="{Binding ReinoSeleccionado}"/>
+        </GroupBox>
+        <GroupBox Header="Líder" Margin="5">
+            <ComboBox ItemsSource="{Binding GobernanteSeleccionado}"/>
+        </GroupBox>
+        <GroupBox Header="Capital" Margin="5">
+            <ComboBox ItemsSource="{Binding ListaCiudades}" />
+        </GroupBox>
+        <Button Content="Añadir reino" Margin="50, 5"/>
+        <Button Content="Cancelar" Margin="50, 5" Click="click_CerrarWin" />
+    </StackPanel>
+</Window>
